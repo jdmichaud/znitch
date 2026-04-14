@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        optimize: [Debug, ReleaseSafe]
+        target: [x86_64-linux-gnu, aarch64-linux-gnu]
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Zig
+        uses: mlugg/setup-zig@v2
+        with:
+          version: 0.14.1
+
+      - name: Build
+        run: zig build -Doptimize=${{ matrix.optimize }} -Dtarget=${{ matrix.target }} --summary all
+
+      - name: Test
+        if: matrix.target == 'x86_64-linux-gnu'
+        run: zig build test -Doptimize=${{ matrix.optimize }} --summary all

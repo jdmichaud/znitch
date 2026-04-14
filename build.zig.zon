@@ -1,0 +1,17 @@
+.{
+    .name = .znitch,
+    .version = "0.1.0",
+    .minimum_zig_version = "0.14.0",
+    .fingerprint = 0x2516ef23c0c0c85d,
+    .dependencies = .{
+        .libbpf = .{
+            .url = "https://github.com/allyourcodebase/libbpf/archive/e6c8a833f33b5a9c07f216227f2c08c682ee544e.tar.gz",
+            .hash = "libbpf-1.7.0-WKFoyjsUAACDYe9yOk7aEkX7zfPd2adeX53O10HnFzS7",
+        },
+    },
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+    },
+}
